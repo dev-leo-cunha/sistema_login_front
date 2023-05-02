@@ -10,7 +10,7 @@ export const Container = styled.div<themeProps>`
     transition: background-color 1s ease;
 `
 export const Fieldset = styled.fieldset<themeProps>`
-    max-width: 500px;
+    width: 500px;
     margin: auto;
     margin-top: 40px;
     padding: 20px;
@@ -20,6 +20,9 @@ export const Fieldset = styled.fieldset<themeProps>`
     flex-direction: column;
     align-items: center;
     transition: border 1s ease;
+    @media (max-width: 570px) {
+        width: 300px;
+    }
 `;
 export const Input = styled.input<themeProps>`
     width: 80%;
@@ -34,6 +37,9 @@ export const Input = styled.input<themeProps>`
     ::placeholder {
         color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
     }
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
 export const Button = styled.button<themeProps>`
@@ -47,6 +53,9 @@ export const Button = styled.button<themeProps>`
     margin-top: 10px;
     color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
     transition: color 1s ease;
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
 export const P = styled.p`
@@ -57,9 +66,18 @@ export const P = styled.p`
 export const Register = styled.div<themeProps>`
     color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
     transition: color 1s ease;
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
-export const StyleLink = {
-    textDecoration: "none",
-    color: '#786161'
-  };
+export const LinkRegister = styled.button`
+    border: 0;
+    background-color: transparent;
+    color: #786161;
+    font-size: 14px;
+    cursor: pointer;
+    @media (max-width: 570px) {
+        font-size: 12px;
+    }
+`

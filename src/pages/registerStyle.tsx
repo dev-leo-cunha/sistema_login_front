@@ -19,12 +19,18 @@ export const Fieldset = styled.fieldset<themeProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width: 570px) {
+        width: 300px;
+    }
 `;
 
 export const Legend = styled.legend`
     font-size: 26px;
     font-weight: bold;
     color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
+    @media (max-width: 570px) {
+        font-size: 20px;
+    }
 `;
 
 export const Input = styled.input<themeProps>`
@@ -40,6 +46,9 @@ export const Input = styled.input<themeProps>`
     ::placeholder {
         color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
     }
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
 export const Button = styled.button<themeProps>`
@@ -52,6 +61,9 @@ export const Button = styled.button<themeProps>`
     border-radius:10px;
     margin-top: 10px;
     color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
 export const P = styled.p`

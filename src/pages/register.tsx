@@ -24,6 +24,10 @@ export const Register = ()=> {
         .catch(userAuthenticationFailed)
         .then(dispatch)
     }
+    const handleLogin = ()=>{
+        dispatch(userAuthenticated(initialState))
+        navigate('/')
+    }
     
     useEffect(()=>{if(user.token) {
         dispatch(userAuthenticated(initialState))
@@ -51,6 +55,7 @@ export const Register = ()=> {
                     onChange={(e) =>  setpasswordRepeat(e.target.value)} 
                 />
                 <C.Button theme={theme.theme} onClick={handleSaveRegister}>Registrar</C.Button>
+                <C.Button theme={theme.theme} onClick={handleLogin}>Voltar ao Login</C.Button>
                 <C.P>{user.error}</C.P>
             </C.Fieldset>
         </C.Container>

@@ -14,6 +14,13 @@ export const Container = styled.div`
     transition: background-color 1s ease;
 `
 
+export const h1 = styled.h1`
+    font-size: 25px;
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
+`
+
 export const Button = styled.button<themeProps>`
     background-color: transparent;
     padding: 10px 10px;
@@ -23,6 +30,9 @@ export const Button = styled.button<themeProps>`
     border-radius:10px;
     margin-top: 10px;
     color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
+    @media (max-width: 570px) {
+        font-size: 15px;
+    }
 `;
 
 export const List = styled.ul<themeProps>`

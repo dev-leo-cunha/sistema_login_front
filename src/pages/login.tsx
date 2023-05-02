@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
 
 import { useDispatch } from 'react-redux'
-import { userAuthenticated, userAuthenticationFailed } from '../redux/reducers/userReducer';
+import { initialState, userAuthenticated, userAuthenticationFailed } from '../redux/reducers/userReducer';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 
 import * as C from './loginStyle'
@@ -26,6 +25,10 @@ export const Login = ()=> {
           .catch(userAuthenticationFailed)
           .then(dispatch)
       }
+    const handleRegister = () => {
+        dispatch(userAuthenticated(initialState))
+        navigate('/register')
+    }
 
       useEffect(()=>{if(user.token) {navigate('/access')}},[user.token])
       
@@ -49,7 +52,7 @@ export const Login = ()=> {
                 <C.Button theme={theme.theme} onClick={handleButton}> Entrar </C.Button>
                 <C.P>{user.error}</C.P>
                 <C.Register theme={theme.theme}> Não tem conta? 
-                    <Link to='/register' style={C.StyleLink}> Registre-se </Link> 
+                    <C.LinkRegister onClick={handleRegister}>Registre-se</C.LinkRegister> 
                 </C.Register>
             </C.Fieldset>
         </C.Container>

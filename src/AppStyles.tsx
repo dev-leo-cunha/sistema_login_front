@@ -18,6 +18,9 @@ export const Title = styled.h1<themeProps>`
     margin: 0;
     color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     transition: color 1s ease;
+    @media (max-width: 570px) {
+        font-size: 25px;
+    }
 `
 export const theme = styled.div<themeProps>`
     width: 50px;

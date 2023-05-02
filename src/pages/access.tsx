@@ -31,7 +31,7 @@ export const Access = ()=> {
     return(
         <C.Container theme={theme.theme}> {!user.error && 
         <>
-            <h1>Bem vindo, {user.fullName}. email: {user.email}</h1>
+            <C.h1>Bem vindo, {user.fullName}. email: {user.email}</C.h1>
             <C.Button theme={theme.theme} onClick={()=>{setOpenList(open => !open)}}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
 
             {openList && user.list.length > 0 && (
