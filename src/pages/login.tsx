@@ -18,12 +18,15 @@ export const Login = ()=> {
 
     const [emailState, setEmailState] = useState('');
     const [passwordState, setPasswordState] = useState('');
+    const [loading, setLoading] = useState(false)
 
     const handleButton = async() => {
-        await login(emailState, passwordState)
-          .then(userAuthenticated)
-          .catch(userAuthenticationFailed)
-          .then(dispatch)
+        setLoading(true)
+            await login(emailState, passwordState)
+            .then(userAuthenticated)
+            .catch(userAuthenticationFailed)
+            .then(dispatch)
+        setLoading(false)
       }
     const handleRegister = () => {
         dispatch(userAuthenticated(initialState))
@@ -54,6 +57,7 @@ export const Login = ()=> {
                 <C.Register theme={theme.theme}> Não tem conta? 
                     <C.LinkRegister onClick={handleRegister}>Registre-se</C.LinkRegister> 
                 </C.Register>
+                {loading && <C.Loading theme={theme.theme}>CARREGANDO...</C.Loading>}
             </C.Fieldset>
         </C.Container>
     )

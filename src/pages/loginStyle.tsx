@@ -81,3 +81,11 @@ export const LinkRegister = styled.button`
         font-size: 12px;
     }
 `
+export const Loading = styled.div<themeProps>`
+    color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
+    font-size: 20px;
+    margin-top: 10px;
+    @media (max-width: 570px) {
+        font-size: 12px;
+    }
+`
