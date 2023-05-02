@@ -32,8 +32,15 @@ export const Login = ()=> {
         dispatch(userAuthenticated(initialState))
         navigate('/register')
     }
+    const hadleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>)=>{
+        if(e.key === 'Enter') {
+            handleButton()
+        }
+    }
 
       useEffect(()=>{if(user.token) {navigate('/access')}},[user.token])
+
+    
       
     return (
         <C.Container theme={theme.theme}>
@@ -47,6 +54,7 @@ export const Login = ()=> {
 
                 <C.Input theme={theme.theme}
                     onChange={(e)=>setPasswordState(e.target.value)}
+                    onKeyDown={hadleKeyDown}
                     type="password"
                     placeholder="Senha..."
                     name=""
