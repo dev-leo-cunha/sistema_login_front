@@ -20,21 +20,13 @@ export const h1 = styled.h1`
         font-size: 15px;
     }
 `
-
-export const Button = styled.button<themeProps>`
-    background-color: transparent;
-    padding: 10px 10px;
-    font-size: 20px;
+export const h2 = styled.h2`
+    font-size: 18px;
     cursor: pointer;
-    border: ${props => props.theme === 'dark' ? '1px solid #CCC' : '1px solid #000'};
-    border-radius:10px;
-    margin-top: 10px;
-    color: ${props => props.theme === 'dark' ? '#CCC' : '#000'};
     @media (max-width: 570px) {
-        font-size: 15px;
+        font-size: 14px;
     }
-`;
-
+`
 export const List = styled.ul<themeProps>`
     border: ${props => props.theme === 'dark' ? '1px solid #CCC' : '1px solid #000'};
     max-height: 300px;

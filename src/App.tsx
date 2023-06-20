@@ -8,6 +8,7 @@ import * as C from './AppStyles'
 import { useAppSelector } from './redux/hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
 import { changeTheme } from './redux/reducers/themeReducer';
+import { UpdateUser } from './pages/updateUser';
 
 
 const App = () => {
@@ -33,6 +34,8 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/access" element={<Access />} />
+        <Route path="/update" element={<UpdateUser />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   );

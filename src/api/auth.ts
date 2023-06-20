@@ -26,3 +26,12 @@ export const register = async (email:string, password:string, passwordRepeat:str
 
   return payload;
 }
+
+export const update = async (newName:string, newPassword:string, password:string) => {
+  const payload = await api.post('/update', {newName, newPassword, password})
+  .then(({data}) => data).catch(() => ({ status: false }));
+  
+  if(!payload.token) return Promise.reject(payload.error)
+
+  return payload;
+}
