@@ -32,6 +32,7 @@ export const Access = () => {
     const updateUser = () => {
         navigate('/update');
     }
+
     return (
         <C.Container theme={theme}> {!user.error &&
             <>

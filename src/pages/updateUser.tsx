@@ -13,10 +13,11 @@ export const UpdateUser = () => {
     const [newPassword, setNewPassword] = useState('')
     const [password, setPassword] = useState('')
 
+    const user = useAppSelector(state => state.user)
     const { theme } = useAppSelector(state => state.theme);
 
     const updateUser = async () => {
-        await update(newName, newPassword, password)
+        await update(newName, newPassword, password, user.token)
             .then(userAuthenticated)
             .catch(userAuthenticationFailed)
             .then(dispatch)
@@ -38,6 +39,7 @@ export const UpdateUser = () => {
                     placeholder="Senha antiga..."
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <BasicStyle.P>{user.error}</BasicStyle.P>
                 <BasicStyle.Button theme={theme} onClick={updateUser}>Editar</BasicStyle.Button>
                 <BasicStyle.Button theme={theme} onClick={() => { navigate('/access') }} >Voltar</BasicStyle.Button>
 
