@@ -6,7 +6,7 @@ export const login = async (email: string, password: string) => {
     .then(({ data }) => data)
     .catch(() => ({ status: false }));
 
-  if (!payload.token) return Promise.reject(payload.message);
+  if (!payload.token) return Promise.reject(payload.error);
 
   return payload;
 };
@@ -23,7 +23,7 @@ export const access = async (token: string) => {
     .then(({ data }) => data)
     .catch(() => ({ status: false }));
 
-  if (!payload.list) return Promise.reject("Não Autorizado!!!!!");
+  if (!payload.list) return Promise.reject(payload.error);
 
   return payload;
 };
@@ -60,7 +60,8 @@ export const update = async (
     )
     .then(({ data }) => data)
     .catch(() => ({ status: false }));
-  if (!payload.token) return Promise.reject(payload.message);
-
+    console.log(payload)
+  if (!payload.message) return Promise.reject(payload.error);
+      
   return payload;
 };
