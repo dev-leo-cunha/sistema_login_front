@@ -45,12 +45,3 @@ type themeProps = {
 //     transition: margin-left 1s ease;
 // `
 
-export const message = styled.div<themeProps>`
-    left: 40%;
-    position: absolute;
-    bottom: 0;
-    color: white;
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
-    margin-bottom: 20px;
-`

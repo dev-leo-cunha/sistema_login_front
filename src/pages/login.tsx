@@ -55,98 +55,100 @@ export const Login = () => {
 
     return (
         <C.Container>
-            <C.Login>
-                <C.Character>
-                    <C.CharacterHead></C.CharacterHead>
-                    <C.CharacterBody></C.CharacterBody>
-                </C.Character>
-                <C.signIn>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.ImgHead></C.ImgHead>
-                            <C.ImgBody></C.ImgBody>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setEmailLogin(e.target.value)}
-                            type='email'
-                            placeholder='Email...'
-                        />
-                    </C.Form>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
-                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setPasswordLogin(e.target.value)}
-                            onKeyDown={hadleKeyDown}
-                            type='password'
-                            placeholder='Senha...'
-                        />
-                    </C.Form>
-                    <C.Error>{user.errorLogin}</C.Error>
-                    <C.Loading>
-                        {loadingLogin && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
-                    </C.Loading>
-                </C.signIn>
-                <C.Button onClick={handleButton}>ENTRAR</C.Button>
-            </C.Login>
+            <C.FormAll>
+                <C.Login>
+                    <C.Character>
+                        <C.CharacterHead></C.CharacterHead>
+                        <C.CharacterBody></C.CharacterBody>
+                    </C.Character>
+                    <C.signIn>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.ImgHead></C.ImgHead>
+                                <C.ImgBody></C.ImgBody>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setEmailLogin(e.target.value)}
+                                type='email'
+                                placeholder='Email...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                                <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setPasswordLogin(e.target.value)}
+                                onKeyDown={hadleKeyDown}
+                                type='password'
+                                placeholder='Senha...'
+                            />
+                        </C.Form>
+                        <C.Error>{user.errorLogin}</C.Error>
+                        <C.Loading>
+                            {loadingLogin && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
+                        </C.Loading>
+                    </C.signIn>
+                    <C.Button onClick={handleButton}>ENTRAR</C.Button>
+                </C.Login>
 
-            <C.FormRegister>
-                <C.Register>
-                    <C.TitleRegister>Cadastre-se</C.TitleRegister>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.ImgHead></C.ImgHead>
-                            <C.ImgBody></C.ImgBody>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setFullNameRegister(e.target.value)}
-                            type='text'
-                            placeholder='Nome Completo...'
-                        />
-                    </C.Form>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.ImgHead></C.ImgHead>
-                            <C.ImgBody></C.ImgBody>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setEmailRegister(e.target.value)}
-                            type='email'
-                            placeholder='Email...'
-                        />
-                    </C.Form>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
-                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setPasswordRegister(e.target.value)}
-                            type='password'
-                            placeholder='Senha...'
-                        />
-                    </C.Form>
-                    <C.Form>
-                        <C.FormImg>
-                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
-                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
-                        </C.FormImg>
-                        <C.FormInput
-                            onChange={(e) => setPasswordRepeatRegister(e.target.value)}
-                            type='password'
-                            placeholder='Repita a Senha...'
-                        />
-                    </C.Form>
-                    <C.Error>{user.errorRegister}</C.Error>
-                    <C.Loading>
-                        {loadingRegister && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
-                    </C.Loading>
-                </C.Register>
-                <C.Button onClick={handleSaveRegister}>CADASTRAR E ENTRAR</C.Button>
-            </C.FormRegister>
-            
+                <C.FormRegister>
+                    <C.Register>
+                        <C.TitleRegister>Cadastre-se</C.TitleRegister>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.ImgHead></C.ImgHead>
+                                <C.ImgBody></C.ImgBody>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setFullNameRegister(e.target.value)}
+                                type='text'
+                                placeholder='Nome Completo...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.ImgHead></C.ImgHead>
+                                <C.ImgBody></C.ImgBody>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setEmailRegister(e.target.value)}
+                                type='email'
+                                placeholder='Email...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                                <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setPasswordRegister(e.target.value)}
+                                type='password'
+                                placeholder='Senha...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                                <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setPasswordRepeatRegister(e.target.value)}
+                                type='password'
+                                placeholder='Repita a Senha...'
+                            />
+                        </C.Form>
+                        <C.Error>{user.errorRegister}</C.Error>
+                        <C.Loading>
+                            {loadingRegister && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
+                        </C.Loading>
+                    </C.Register>
+                    <C.Button onClick={handleSaveRegister}>CADASTRAR E ENTRAR</C.Button>
+                </C.FormRegister>
+            </C.FormAll>
+            <C.message>site em atualização constante...</C.message>
         </C.Container>
     )
 }
