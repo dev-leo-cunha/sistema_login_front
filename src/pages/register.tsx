@@ -84,7 +84,7 @@ export const Register = () => {
                     placeholder="Repita a Senha..."
                     onChange={(e) => setpasswordRepeat(e.target.value)}
                 />
-                <C.Error>{user.error}</C.Error>
+                <C.Error>{user.errorLogin}</C.Error>
             </C.Register>
             <C.Buttons>
                 <C.Button theme={theme.theme} onClick={handleSaveRegister}>Registrar</C.Button>
