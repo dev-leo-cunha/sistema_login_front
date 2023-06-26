@@ -24,12 +24,7 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <C.Container theme={theme.theme}>
-        <C.Title theme={theme.theme}>Sistema de Login Básico</C.Title>
-        <C.theme theme={theme.theme} onClick={handleTheme}>
-          <C.themeCircle theme={theme.theme}></C.themeCircle>
-        </C.theme>
-      </C.Container>
+      <C.message>site em atualização constante...</C.message>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />

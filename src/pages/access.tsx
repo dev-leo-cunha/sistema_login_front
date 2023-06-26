@@ -5,7 +5,6 @@ import { useAppSelector } from '../redux/hooks/useAppSelector';
 import { initialState, userAuthenticated, userAuthenticationFailed, userList } from '../redux/reducers/userReducer';
 import { useDispatch } from 'react-redux';
 import * as C from './accessStyle'
-import * as BasicStyle from './basicStyle'
 
 export const Access = () => {
     const navigate = useNavigate();
@@ -34,24 +33,53 @@ export const Access = () => {
     }
 
     return (
-        <C.Container theme={theme}> {!user.error &&
-            <>
-                <C.h1>Bem vindo, {user.fullName}. email: {user.email}</C.h1>
-                <C.h2 onClick={updateUser} >Editar Usuário</C.h2>
-                <BasicStyle.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</BasicStyle.Button>
 
-                {openList && user.list.length > 0 && (
-                    <C.List theme={theme}>
-                        {user.list.map((item, index) => (
-                            <C.ListLi key={index}>{item}</C.ListLi>
-                        ))}
-                    </C.List>
-                )}
+        // <C.Container theme={theme}> {!user.errorLogin &&
+        //     <>
+        //         <C.h1>Bem vindo, {user.fullName}. email: {user.email}</C.h1>
+        //         <C.h2 onClick={updateUser} >Editar Usuário</C.h2>
+        //         <BasicStyle.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</BasicStyle.Button>
 
-            </>}
-            <BasicStyle.P> {user.error} </BasicStyle.P>
+        //         {openList && user.list.length > 0 && (
+        //             <C.List theme={theme}>
+        //                 {user.list.map((item, index) => (
+        //                     <C.ListLi key={index}>{item}</C.ListLi>
+        //                 ))}
+        //             </C.List>
+        //         )}
 
-            <BasicStyle.Button theme={theme} onClick={disconnect} >SAIR</BasicStyle.Button>
+        //     </>}
+        //     <BasicStyle.P> {user.errorLogin} </BasicStyle.P>
+
+        //     <BasicStyle.Button theme={theme} onClick={disconnect} >SAIR</BasicStyle.Button>
+        // </C.Container>
+        <C.Container>
+            <C.Access>
+                <C.Welcome>
+                    <C.H1>Seja muito bem vindo, {user.fullName}.</C.H1>
+                </C.Welcome>
+                <C.Buttons>
+                    <C.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
+                    <C.Button theme={theme} onClick={disconnect} >SAIR</C.Button>
+                </C.Buttons>
+                <C.ListBox>
+                    {openList && user.list.length > 0 && (
+                        <C.List theme={theme}>
+                            {/* <C.OrderBy>
+                                Ordernar Por:
+                                <C.Select>
+                                    <C.Option></C.Option>
+                                    <C.Option>A - Z</C.Option>
+                                    <C.Option>Z - A</C.Option>
+                                </C.Select>
+                            </C.OrderBy> */}
+                            {user.list.map((item, index) => (
+                                <C.ListLi key={index}>{item}</C.ListLi>
+                            ))}
+                        </C.List>
+                    )}
+                </C.ListBox>
+            </C.Access>
         </C.Container>
     )
 }

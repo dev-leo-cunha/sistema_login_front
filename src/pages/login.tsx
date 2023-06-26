@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { login } from '../api/auth';
+import { login, register } from '../api/auth';
 
 import { useDispatch } from 'react-redux'
-import { initialState, userAuthenticated, userAuthenticationFailed } from '../redux/reducers/userReducer';
+import { userAuthenticated, userAuthenticationFailed, userRegisterFailed } from '../redux/reducers/userReducer';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 
 import * as C from './loginStyle'
-import * as BasicStyle from './basicStyle'
-
 
 export const Login = () => {
     const dispatch = useDispatch();
@@ -17,21 +15,33 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
-    const [emailState, setEmailState] = useState('');
-    const [passwordState, setPasswordState] = useState('');
-    const [loading, setLoading] = useState(false)
+    const [emailLogin, setEmailLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+    const [loadingLogin, setLoadingLogin] = useState(false)
+
+    const [fullNameRegister, setFullNameRegister] = useState('');
+    const [emailRegister, setEmailRegister] = useState('');
+    const [passwordRegister, setPasswordRegister] = useState('');
+    const [passwordRepeatRegister, setPasswordRepeatRegister] = useState('');
+    const [loadingRegister, setLoadingRegister] = useState(false)
 
     const handleButton = async () => {
-        setLoading(true)
-        await login(emailState, passwordState)
+        setLoadingLogin(true)
+        await login(emailLogin, passwordLogin)
             .then(userAuthenticated)
             .catch(userAuthenticationFailed)
             .then(dispatch)
-        setLoading(false)
+        if (user.token) { navigate('/access') }
+        console.log(user.token)
+        setLoadingLogin(false)
     }
-    const handleRegister = () => {
-        dispatch(userAuthenticated(initialState))
-        navigate('/register')
+    const handleSaveRegister = async () => {
+        setLoadingRegister(true)
+        await register(emailRegister, passwordRegister, passwordRepeatRegister, fullNameRegister)
+            .then((userAuthenticated))
+            .catch(userRegisterFailed)
+            .then(dispatch)
+        setLoadingRegister(false)
     }
     const hadleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -39,34 +49,104 @@ export const Login = () => {
         }
     }
 
-    useEffect(() => { if (user.token) { navigate('/access') } }, [user.token])
+    useEffect(() => {
+        if (user.token) { navigate('/access') }
+    }, [user.token])
 
     return (
-        <BasicStyle.Container theme={theme.theme}>
-            <BasicStyle.Fieldset theme={theme.theme}>
-                <BasicStyle.Legend theme={theme.theme}>Login</BasicStyle.Legend>
-                <BasicStyle.Input theme={theme.theme}
-                    onChange={(e) => setEmailState(e.target.value)}
-                    type="text"
-                    placeholder="Email..."
-                    name=""
-                />
+        <C.Container>
+            <C.Login>
+                <C.Character>
+                    <C.CharacterHead></C.CharacterHead>
+                    <C.CharacterBody></C.CharacterBody>
+                </C.Character>
+                <C.signIn>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.ImgHead></C.ImgHead>
+                            <C.ImgBody></C.ImgBody>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setEmailLogin(e.target.value)}
+                            type='email'
+                            placeholder='Email...'
+                        />
+                    </C.Form>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setPasswordLogin(e.target.value)}
+                            onKeyDown={hadleKeyDown}
+                            type='password'
+                            placeholder='Senha...'
+                        />
+                    </C.Form>
+                    <C.Error>{user.errorLogin}</C.Error>
+                    <C.Loading>
+                        {loadingLogin && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
+                    </C.Loading>
+                </C.signIn>
+                <C.Button onClick={handleButton}>ENTRAR</C.Button>
+            </C.Login>
 
-                <BasicStyle.Input theme={theme.theme}
-                    onChange={(e) => setPasswordState(e.target.value)}
-                    onKeyDown={hadleKeyDown}
-                    type="password"
-                    placeholder="Senha..."
-                    name=""
-                />
-
-                <BasicStyle.Button theme={theme.theme} onClick={handleButton}> Entrar </BasicStyle.Button>
-                <BasicStyle.P>{user.error}</BasicStyle.P>
-                <C.Register theme={theme.theme}> Não tem conta?
-                    <C.LinkRegister onClick={handleRegister}>Registre-se</C.LinkRegister>
+            <C.FormRegister>
+                <C.Register>
+                    <C.TitleRegister>Cadastre-se</C.TitleRegister>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.ImgHead></C.ImgHead>
+                            <C.ImgBody></C.ImgBody>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setFullNameRegister(e.target.value)}
+                            type='text'
+                            placeholder='Nome Completo...'
+                        />
+                    </C.Form>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.ImgHead></C.ImgHead>
+                            <C.ImgBody></C.ImgBody>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setEmailRegister(e.target.value)}
+                            type='email'
+                            placeholder='Email...'
+                        />
+                    </C.Form>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setPasswordRegister(e.target.value)}
+                            type='password'
+                            placeholder='Senha...'
+                        />
+                    </C.Form>
+                    <C.Form>
+                        <C.FormImg>
+                            <C.FormImgPadlockTop></C.FormImgPadlockTop>
+                            <C.FormImgPadlockDown></C.FormImgPadlockDown>
+                        </C.FormImg>
+                        <C.FormInput
+                            onChange={(e) => setPasswordRepeatRegister(e.target.value)}
+                            type='password'
+                            placeholder='Repita a Senha...'
+                        />
+                    </C.Form>
+                    <C.Error>{user.errorRegister}</C.Error>
+                    <C.Loading>
+                        {loadingRegister && <C.Loading theme={theme.theme}>Carregando...</C.Loading>}
+                    </C.Loading>
                 </C.Register>
-                {loading && <C.Loading theme={theme.theme}>CARREGANDO...</C.Loading>}
-            </BasicStyle.Fieldset>
-        </BasicStyle.Container>
+                <C.Button onClick={handleSaveRegister}>CADASTRAR E ENTRAR</C.Button>
+            </C.FormRegister>
+            
+        </C.Container>
     )
 }
