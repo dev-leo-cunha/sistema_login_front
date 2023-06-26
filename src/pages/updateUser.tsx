@@ -39,7 +39,7 @@ export const UpdateUser = () => {
                     placeholder="Senha antiga..."
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <BasicStyle.P>{user.error}</BasicStyle.P>
+                <BasicStyle.P>{user.errorLogin}</BasicStyle.P>
                 <BasicStyle.Button theme={theme} onClick={updateUser}>Editar</BasicStyle.Button>
                 <BasicStyle.Button theme={theme} onClick={() => { navigate('/access') }} >Voltar</BasicStyle.Button>
 
