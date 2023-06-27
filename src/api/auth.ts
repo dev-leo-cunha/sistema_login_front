@@ -60,8 +60,25 @@ export const update = async (
     )
     .then(({ data }) => data)
     .catch(() => ({ status: false }));
-    console.log(payload)
+  console.log(payload);
   if (!payload.message) return Promise.reject(payload.error);
-      
+
+  return payload;
+};
+
+export const listOrder = async (token: string, order: string) => {
+  const payload = await api
+    .post(
+      "/listOrder",
+      { order },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    )
+    .then(({ data }) => data)
+    .catch(() => ({ status: false }));
+
+  if (!payload.list) return Promise.reject(payload.error);
+
   return payload;
 };

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { access } from '../api/auth';
+import { access, listOrder } from '../api/auth';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 import { initialState, userAuthenticated, userAuthenticationFailed, userList } from '../redux/reducers/userReducer';
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ export const Access = () => {
     const { theme } = useAppSelector(state => state.theme);
 
     const [openList, setOpenList] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('')
 
     useEffect(() => { loadList() }, [])
 
@@ -28,35 +29,33 @@ export const Access = () => {
         dispatch(userAuthenticated(initialState))
         navigate('/');
     }
-    const updateUser = () => {
-        navigate('/update');
+    const OrderAsc = async () => {
+        listOrder(user.token, 'asc')
+            .then(userList)
+            .catch(userAuthenticationFailed)
+            .then(dispatch)
     }
+    const OrderDes = async () => {
+        listOrder(user.token, 'desc')
+            .then(userList)
+            .catch(userAuthenticationFailed)
+            .then(dispatch)
+    }
+    useEffect(() => {
+        if (selectedOption === 'asc') {
+            OrderAsc()
+        } else if (selectedOption === 'desc') {
+            OrderDes()
+        } else if (selectedOption === '') {
+            loadList()
+        }
+    }, [selectedOption])
 
     return (
-
-        // <C.Container theme={theme}> {!user.errorLogin &&
-        //     <>
-        //         <C.h1>Bem vindo, {user.fullName}. email: {user.email}</C.h1>
-        //         <C.h2 onClick={updateUser} >Editar Usuário</C.h2>
-        //         <BasicStyle.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</BasicStyle.Button>
-
-        //         {openList && user.list.length > 0 && (
-        //             <C.List theme={theme}>
-        //                 {user.list.map((item, index) => (
-        //                     <C.ListLi key={index}>{item}</C.ListLi>
-        //                 ))}
-        //             </C.List>
-        //         )}
-
-        //     </>}
-        //     <BasicStyle.P> {user.errorLogin} </BasicStyle.P>
-
-        //     <BasicStyle.Button theme={theme} onClick={disconnect} >SAIR</BasicStyle.Button>
-        // </C.Container>
         <C.Container>
             <C.Access>
                 <C.Welcome>
-                    <C.H1>Seja muito bem vindo, {user.fullName}.</C.H1>
+                    Seja muito bem vindo, {user.fullName}.
                 </C.Welcome>
                 <C.Buttons>
                     <C.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
@@ -65,14 +64,23 @@ export const Access = () => {
                 <C.ListBox>
                     {openList && user.list.length > 0 && (
                         <C.List theme={theme}>
-                            {/* <C.OrderBy>
+                            <C.OrderBy>
                                 Ordernar Por:
-                                <C.Select>
-                                    <C.Option></C.Option>
-                                    <C.Option>A - Z</C.Option>
-                                    <C.Option>Z - A</C.Option>
+                                <C.Select
+                                    value={selectedOption}
+                                    onChange={e => setSelectedOption(e.target.value)}
+                                >
+                                    <C.Option
+                                        value=''
+                                    ></C.Option>
+                                    <C.Option
+                                        value='asc'
+                                    >A - Z</C.Option>
+                                    <C.Option
+                                        value='desc'
+                                    >Z - A</C.Option>
                                 </C.Select>
-                            </C.OrderBy> */}
+                            </C.OrderBy>
                             {user.list.map((item, index) => (
                                 <C.ListLi key={index}>{item}</C.ListLi>
                             ))}

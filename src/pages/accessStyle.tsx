@@ -9,11 +9,13 @@ export const Container = styled.div<themeProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 50px);
+    min-height: 100vh;
     background-image: url(${Background});
+    background-size: cover;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    padding-bottom: 50px;
+    padding-bottom: 150px;
+    box-sizing: border-box;
 `
 export const Access = styled.div<themeProps>`
     display: flex;
@@ -31,15 +33,21 @@ export const Welcome = styled.div<themeProps>`
     padding: 30px;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     font-family: 'Courier New', Courier, monospace;
-`
-export const H1 = styled.h1<themeProps>`
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
+    font-size: 32px;
+    font-weight: bold;
+    @media (max-width: 950px) {
+        margin-top: 50px;
+        padding: 20px;
+        font-size: 22px;
+    }
 `
 export const Buttons = styled.div<themeProps>`
     width: 450px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 950px) {
+        width: 300px;
+    }
 `
 
 export const Button = styled.button<themeProps>`
@@ -53,11 +61,22 @@ export const Button = styled.button<themeProps>`
     cursor: pointer;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
     font-family: 'Courier New', Courier, monospace;
+    @media (max-width: 950px) {
+        font-size: 12px;
+        padding: 5px 10px;
+        width: 140px;
+    }
 `
 
 export const ListBox = styled.div<themeProps>`
-    width: 420px;
+    max-width: 420px;
     height: 400px;
+    display: flex;
+    justify-content: center;
+    @media (max-width: 950px) {
+        max-width: 300px;
+        height: 300px;
+    }
 `
 export const List = styled.ul<themeProps>`
     border: 1px solid white;
@@ -65,16 +84,24 @@ export const List = styled.ul<themeProps>`
     overflow: auto;
     padding: 20px;
     border-radius: 10px;
-    min-width: 360px;
+    width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: all 2s;
+    @media (max-width: 950px) {
+        width: 317px;
+        height: 300px;
+    }
 `;
 export const ListLi = styled.li`
     list-style: none;
     font-size: 20px;
     margin-top: 5px;
+    @media (max-width: 950px) {
+        font-size: 15px;
+        margin-top: 3px;
+    }
 `;
 export const OrderBy = styled.div<themeProps>`
     width: 100%;
@@ -83,6 +110,10 @@ export const OrderBy = styled.div<themeProps>`
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid white;
+    @media (max-width: 950px) {
+        padding: 5px 0;
+        font-size: 13px;
+    }
 `
 export const Select = styled.select<themeProps>`
     border: 1px solid white;
@@ -91,6 +122,10 @@ export const Select = styled.select<themeProps>`
     padding: 5px;
     border-radius: 10px;
     margin-left: 10px;
+    @media (max-width: 950px) {
+        font-size: 13px;
+        width: 45px;
+    }
 `
 export const Option = styled.option<themeProps>`
     color: white;
