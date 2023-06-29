@@ -7,17 +7,19 @@ import { useDispatch } from 'react-redux';
 import * as C from './accessStyle'
 
 export const Access = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const navigate = useNavigate(); // hook para navegar entre as páginas
+    const dispatch = useDispatch(); // hook para disparar uma action
 
-    const user = useAppSelector(state => state.user);
-    const { theme } = useAppSelector(state => state.theme);
+    const user = useAppSelector(state => state.user); // hook para acessar o usuário
+    const { theme } = useAppSelector(state => state.theme); // hook para acessar o tema
 
-    const [openList, setOpenList] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('')
+    const [openList, setOpenList] = useState(false); // hook para abrir/fechar a lista de usuários
+    const [selectedOption, setSelectedOption] = useState('') // hook para selecionar a opção de ordenação
 
-    useEffect(() => { loadList() }, [])
+    useEffect(() => { loadList() }, []) // hook para carregar a lista de usuários ao carregar a página
 
+
+    // função para carregar a lista de usuários
     const loadList = () => {
         access(user.token)
             .then(userList)
@@ -25,31 +27,21 @@ export const Access = () => {
             .then(dispatch)
     }
 
+    // função para desconectar o usuário
     const disconnect = () => {
         dispatch(userAuthenticated(initialState))
         navigate('/');
     }
-    const OrderAsc = async () => {
-        listOrder(user.token, 'asc')
+
+    // função para ordenar a lista de usuários
+    const Order = async () => {
+        listOrder(user.token, selectedOption)
             .then(userList)
             .catch(userAuthenticationFailed)
             .then(dispatch)
     }
-    const OrderDes = async () => {
-        listOrder(user.token, 'desc')
-            .then(userList)
-            .catch(userAuthenticationFailed)
-            .then(dispatch)
-    }
-    useEffect(() => {
-        if (selectedOption === 'asc') {
-            OrderAsc()
-        } else if (selectedOption === 'desc') {
-            OrderDes()
-        } else if (selectedOption === '') {
-            loadList()
-        }
-    }, [selectedOption])
+
+    useEffect(() => { Order() }, [selectedOption]) // hook para ordenar a lista de usuários ao selecionar a opção
 
     return (
         <C.Container>
@@ -58,12 +50,12 @@ export const Access = () => {
                     Seja muito bem vindo, {user.fullName}.
                 </C.Welcome>
                 <C.Buttons>
-                    <C.Button theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
-                    <C.Button theme={theme} onClick={disconnect} >SAIR</C.Button>
+                    <C.Button onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
+                    <C.Button onClick={disconnect} >SAIR</C.Button>
                 </C.Buttons>
                 <C.ListBox>
                     {openList && user.list.length > 0 && (
-                        <C.List theme={theme}>
+                        <C.List>
                             <C.OrderBy>
                                 Ordernar Por:
                                 <C.Select

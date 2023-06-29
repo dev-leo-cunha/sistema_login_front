@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Background from "../img/background.jpg"
 
+// Estilização da página de acesso
+
 type themeProps = {
     theme?: 'dark' | 'light'
 }
@@ -40,6 +42,11 @@ export const Welcome = styled.div<themeProps>`
         padding: 20px;
         font-size: 22px;
     }
+    @media (max-width: 500px) {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 16px;
+    }
 `
 export const Buttons = styled.div<themeProps>`
     width: 450px;
@@ -47,6 +54,9 @@ export const Buttons = styled.div<themeProps>`
     justify-content: space-between;
     @media (max-width: 950px) {
         width: 300px;
+    }
+    @media (max-width: 500px) {
+        width: 200px;
     }
 `
 
@@ -66,6 +76,11 @@ export const Button = styled.button<themeProps>`
         padding: 5px 10px;
         width: 140px;
     }
+    @media (max-width: 500px) {
+        font-size: 10px;
+        padding: 3px 5px;
+        width: 100px;
+    }
 `
 
 export const ListBox = styled.div<themeProps>`
@@ -76,6 +91,10 @@ export const ListBox = styled.div<themeProps>`
     @media (max-width: 950px) {
         max-width: 300px;
         height: 300px;
+    }
+    @media (max-width: 500px) {
+        max-width: 200px;
+        height: 200px;
     }
 `
 export const List = styled.ul<themeProps>`
@@ -93,6 +112,10 @@ export const List = styled.ul<themeProps>`
         width: 317px;
         height: 300px;
     }
+    @media (max-width: 500px) {
+        width: 200px;
+        height: 200px;
+    }
 `;
 export const ListLi = styled.li`
     list-style: none;
@@ -101,6 +124,10 @@ export const ListLi = styled.li`
     @media (max-width: 950px) {
         font-size: 15px;
         margin-top: 3px;
+    }
+    @media (max-width: 500px) {
+        font-size: 10px;
+        margin-top: 2px;
     }
 `;
 export const OrderBy = styled.div<themeProps>`
@@ -114,6 +141,10 @@ export const OrderBy = styled.div<themeProps>`
         padding: 5px 0;
         font-size: 13px;
     }
+    @media (max-width: 500px) {
+        padding: 3px 0;
+        font-size: 9px;
+    }
 `
 export const Select = styled.select<themeProps>`
     border: 1px solid white;
@@ -123,11 +154,21 @@ export const Select = styled.select<themeProps>`
     border-radius: 10px;
     margin-left: 10px;
     @media (max-width: 950px) {
-        font-size: 13px;
-        width: 45px;
+        font-size: 11px;
+        width: 60px;
+    }
+    @media (max-width: 500px) {
+        font-size: 8px;
+        width: 52px;
     }
 `
 export const Option = styled.option<themeProps>`
     color: white;
     background-color: #00264D;
+    @media (max-width: 950px) {
+        font-size: 11px;
+    }
+    @media (max-width: 500px) {
+        font-size: 8px;
+    }
 `

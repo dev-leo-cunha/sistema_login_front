@@ -1,5 +1,7 @@
 import api from "./api";
 
+
+// requisição para o servidor para fazer login
 export const login = async (email: string, password: string) => {
   const payload = await api
     .post("/login", { email, password })
@@ -11,6 +13,9 @@ export const login = async (email: string, password: string) => {
   return payload;
 };
 
+
+// requisição para o servidor para receber a lista de usuários
+// o token é passado no header da requisição para autenticar o usuário
 export const access = async (token: string) => {
   const payload = await api
     .post(
@@ -28,6 +33,8 @@ export const access = async (token: string) => {
   return payload;
 };
 
+
+// requisição para o servidor para registrar um novo usuário
 export const register = async (
   email: string,
   password: string,
@@ -44,6 +51,8 @@ export const register = async (
   return payload;
 };
 
+// requisição para o servidor para atualizar os dados do usuário
+// o token é passado no header da requisição para autenticar o usuário
 export const update = async (
   newName: string,
   newPassword: string,
@@ -66,6 +75,9 @@ export const update = async (
   return payload;
 };
 
+
+// requisição para o servidor para receber a lista de usuários ordenada
+// o order é passado no body da requisição para informar a ordenação
 export const listOrder = async (token: string, order: string) => {
   const payload = await api
     .post(

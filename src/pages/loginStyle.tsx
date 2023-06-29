@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Background from "../img/background.jpg"
+
+// Estilização da página de login
 type themeProps = {
     theme?: 'dark' | 'light'
 }
