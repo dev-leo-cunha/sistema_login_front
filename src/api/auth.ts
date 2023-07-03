@@ -1,6 +1,5 @@
 import api from "./api";
 
-
 // requisição para o servidor para fazer login
 export const login = async (email: string, password: string) => {
   const payload = await api
@@ -12,7 +11,6 @@ export const login = async (email: string, password: string) => {
 
   return payload;
 };
-
 
 // requisição para o servidor para receber a lista de usuários
 // o token é passado no header da requisição para autenticar o usuário
@@ -33,6 +31,13 @@ export const access = async (token: string) => {
   return payload;
 };
 
+export const CheckEmailRegister = async (email: string) => {
+  const payload = await api
+    .post("/checkemail", { email })
+    .then(({ data }) => data)
+    .catch(() => ({ status: false }));
+  return payload;
+};
 
 // requisição para o servidor para registrar um novo usuário
 export const register = async (
@@ -74,7 +79,6 @@ export const update = async (
 
   return payload;
 };
-
 
 // requisição para o servidor para receber a lista de usuários ordenada
 // o order é passado no body da requisição para informar a ordenação

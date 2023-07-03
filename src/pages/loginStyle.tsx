@@ -6,14 +6,14 @@ type themeProps = {
     theme?: 'dark' | 'light'
 }
 export const Container = styled.div<themeProps>`
-    padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    min-height: calc(100vh - 100px);
+    min-height: 100vh;
     background-image: url(${Background});
     background-size: cover;
+    box-sizing: border-box;
 `
 export const FormAll = styled.div<themeProps>`
     display: flex;
@@ -26,13 +26,15 @@ export const Login = styled.div<themeProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 100px;
     @media (max-width: 950px) {
         margin-right: 0;
     }
 `
 export const Character = styled.div<themeProps>`
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 40px;
     width: 120px;
     height: 120px;
@@ -43,36 +45,6 @@ export const Character = styled.div<themeProps>`
         width: 80px;
         height: 80px;
         margin-top: 58px;
-    }
-`
-export const CharacterHead = styled.div<themeProps>`
-    margin-top: 20px;
-    margin-left: 42px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 3px solid white;
-    @media (max-width: 500px) {
-        width: 16px;
-        height: 16px;
-        margin-left: 30px;
-        margin-top: 14px;
-        border: 2px solid white;
-    }
-`
-export const CharacterBody = styled.div<themeProps>`
-    margin-top: -2px;
-    margin-left: 22px;
-    width: 70px;
-    height: 35px;
-    border-radius: 50px 50px 0 0;
-    overflow: hidden;
-    border: 3px solid white;
-    @media (max-width: 500px) {
-        width: 36px;
-        height: 19px;
-        margin-left: 20px;
-        border: 2px solid white;
     }
 `
 export const signIn = styled.div<themeProps>`
@@ -116,50 +88,6 @@ export const FormImg = styled.div`
     @media (max-width: 500px) {
         width: 30px;
         height: 30px;
-    }
-`
-export const ImgHead = styled.div`
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: white;
-    @media (max-width: 500px) {
-        width: 8px;
-        height: 8px;
-    }
-`
-export const ImgBody = styled.div`
-    margin-top: -1px;
-    width: 18px;
-    height: 12px;
-    border-radius: 50px 50px 0 0;
-    background-color: white;
-    overflow: hidden;
-    @media (max-width: 500px) {
-        width: 12px;
-        height: 8px;
-    }
-`
-export const FormImgPadlockTop = styled.div`
-    width: 12px;
-    height: 8px;
-    border-radius: 50px 50px 0 0;
-    border: 3px solid white;
-    border-bottom: 0;
-    overflow: hidden;
-    @media (max-width: 500px) {
-        width: 8px;
-        height: 5px;
-    }
-`
-export const FormImgPadlockDown = styled.div`
-    width: 20px;
-    height: 15px;
-    background-color: white;
-    border-radius: 2px;
-    @media (max-width: 500px) {
-        width: 16px;
-        height: 10px;
     }
 `
 export const FormInput = styled.input<themeProps>`
@@ -223,6 +151,7 @@ export const FormRegister = styled.div<themeProps>`
 export const Register = styled.div<themeProps>`
     background-color: rgba(255, 255, 255, 0.2);
     margin-top: 100px;
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
