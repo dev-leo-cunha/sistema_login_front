@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Background from "../img/background.jpg"
 
 // Estilização da página de acesso
@@ -6,17 +6,22 @@ import Background from "../img/background.jpg"
 type themeProps = {
     theme?: 'dark' | 'light'
 }
+type updateProps = {
+    openUpdate: boolean
+}
+type listProps = {
+    openList: boolean
+}
 export const Container = styled.div<themeProps>`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding: 30px;
     align-items: center;
     min-height: 100vh;
     background-image: url(${Background});
     background-size: cover;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    padding-bottom: 150px;
     box-sizing: border-box;
 `
 export const Access = styled.div<themeProps>`
@@ -26,7 +31,6 @@ export const Access = styled.div<themeProps>`
 `
 export const Welcome = styled.div<themeProps>`
     background-color: rgba(255, 255, 255, 0.2);
-    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,12 +42,10 @@ export const Welcome = styled.div<themeProps>`
     font-size: 32px;
     font-weight: bold;
     @media (max-width: 950px) {
-        margin-top: 50px;
         padding: 20px;
         font-size: 22px;
     }
     @media (max-width: 500px) {
-        margin-top: 20px;
         padding: 10px;
         font-size: 16px;
     }
@@ -82,22 +84,29 @@ export const Button = styled.button<themeProps>`
         width: 100px;
     }
 `
-
-export const ListBox = styled.div<themeProps>`
-    max-width: 420px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
+export const ButtonReverse = styled.button<themeProps>`
+    font-size: 17px;
+    color: white;
+    padding: 10px 20px;
+    width: 180px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px 20px 0px 0px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', Courier, monospace;
     @media (max-width: 950px) {
-        max-width: 300px;
-        height: 300px;
+        font-size: 12px;
+        padding: 5px 10px;
+        width: 140px;
     }
     @media (max-width: 500px) {
-        max-width: 200px;
-        height: 200px;
+        font-size: 10px;
+        padding: 3px 5px;
+        width: 100px;
     }
 `
-export const List = styled.ul<themeProps>`
+export const List = styled.ul<listProps>`
     border: 1px solid white;
     max-height: 420px;
     overflow: auto;
@@ -107,7 +116,8 @@ export const List = styled.ul<themeProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 2s;
+    animation-fill-mode: forwards;
+    animation: ${props => props.openList ? expandHeight : collapseHeight} 1s ease-in-out forwards;
     @media (max-width: 950px) {
         width: 317px;
         height: 300px;
@@ -170,5 +180,126 @@ export const Option = styled.option<themeProps>`
     }
     @media (max-width: 500px) {
         font-size: 8px;
+    }
+`
+const expandHeight = keyframes`
+    0% {max-height: 0; opacity: 0;}
+    100% {max-height: 370px; opacity: 1;}
+`
+const collapseHeight = keyframes`
+  0% {max-height: 370px; opacity: 1; }
+  100% {max-height: 0; opacity: 0;}
+`;
+
+export const Update = styled.div<updateProps>`
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.2);
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 40px;
+    width: 420px;
+    animation-fill-mode: forwards;
+    animation: ${props => props.openUpdate ? expandHeight : collapseHeight} 1s ease-in-out forwards;
+    opacity: ${props => props.openUpdate ? 1 : 0};
+    max-height: ${props => props.openUpdate ? '370px' : '0'};
+    padding-top: 20px;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+    @media (max-width: 950px) {
+        width: 350px;
+        padding-bottom: 0px;
+    }
+    @media (max-width: 500px) {
+        width: 300px;
+        padding-bottom: 0px;
+    }
+`
+
+export const Form = styled.div<themeProps>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    @media (max-width: 950px) {
+        margin-bottom: 10px;
+    }
+`
+export const FormImg = styled.div`
+    width: 50px;
+    height: 50px;
+    border-right: 0;
+    background-color: #00264D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px 0 0 5px;
+    @media (max-width: 950px) {
+        width: 40px;
+        height: 40px;
+    }
+    @media (max-width: 500px) {
+        width: 30px;
+        height: 30px;
+    }
+`
+export const FormInput = styled.input<themeProps>`
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    width: 300px;
+    height: 48px;
+    padding-left: 10px;
+    border: 0;
+    outline: none;
+    background-color: #3A5073;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    ::placeholder {
+        color: white
+    }
+    @media (max-width: 950px) {
+        width: 250px;
+        height: 40px;
+        font-size: 14px;
+    }
+    @media (max-width: 500px) {
+        width: 200px;
+        height: 30px;
+        font-size: 12px;
+    }
+`
+export const ButtonUpdate = styled.button<themeProps>`
+    font-size: 17px;
+    margin: 5px;
+    color: white;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    width: 150px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+    @media (max-width: 950px) {
+        font-size: 12px;
+        padding: 5px 10px;
+        width: 140px;
+    }
+    @media (max-width: 500px) {
+        font-size: 10px;
+        padding: 3px 5px;
+        width: 100px;
+    }
+`
+export const msgUpdate = styled.div`
+    height: 40px;
+    text-align: center;
+    @media (max-width: 950px) {
+        font-size: 12px;
+    }
+    @media (max-width: 500px) {
+        font-size: 10px;
     }
 `

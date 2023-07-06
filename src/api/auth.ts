@@ -61,20 +61,20 @@ export const register = async (
 export const update = async (
   newName: string,
   newPassword: string,
+  newPasswordRepeat: string,
   password: string,
   token: string
 ) => {
   const payload = await api
     .put(
       "/update",
-      { newName, newPassword, password },
+      { newName, newPassword, newPasswordRepeat, password },
       {
         headers: { authorization: `Bearer ${token}` },
       }
     )
     .then(({ data }) => data)
     .catch(() => ({ status: false }));
-  console.log(payload);
   if (!payload.message) return Promise.reject(payload.error);
 
   return payload;

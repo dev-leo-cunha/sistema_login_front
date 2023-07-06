@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { access, listOrder } from '../api/auth';
+import { access, listOrder, update } from '../api/auth';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
-import { initialState, userAuthenticated, userAuthenticationFailed, userList } from '../redux/reducers/userReducer';
+import { initialState, userAuthenticated, userAuthenticatedFailedUpdate, userAuthenticatedUpdate, userAuthenticationFailed, userList } from '../redux/reducers/userReducer';
 import { useDispatch } from 'react-redux';
-import * as C from './accessStyle'
+import * as C from './accessStyle';
+import { LockOutlined, PersonOutline } from '@mui/icons-material';
 
 export const Access = () => {
     const navigate = useNavigate(); // hook para navegar entre as páginas
@@ -15,9 +16,21 @@ export const Access = () => {
 
     const [openList, setOpenList] = useState(false); // hook para abrir/fechar a lista de usuários
     const [selectedOption, setSelectedOption] = useState('') // hook para selecionar a opção de ordenação
+    const [openUpdate, setOpenUpdate] = useState(false); // hook para abrir/fechar o formulario de alteração de usuários
+
+    const [newName, setNewName] = useState(''); // hook para armazenar o novo nome do usuário
+    const [newPassword, setNewPassword] = useState(''); // hook para armazenar a nova senha do usuário
+    const [newPasswordRepeat, setNewPasswordRepeat] = useState(''); // hook para armazenar a nova senha de confirmação do usuário
+    const [oldPassword, setOldPassword] = useState(''); // hook para armazenar a senha antiga do usuário
 
     useEffect(() => { loadList() }, []) // hook para carregar a lista de usuários ao carregar a página
 
+    const updateUser = () => {
+        update(newName, newPassword, newPasswordRepeat, oldPassword, user.token)
+            .then(userAuthenticatedUpdate)
+            .catch(userAuthenticatedFailedUpdate)
+            .then(dispatch)
+    }
 
     // função para carregar a lista de usuários
     const loadList = () => {
@@ -46,6 +59,88 @@ export const Access = () => {
     return (
         <C.Container>
             <C.Access>
+                {!openUpdate ? (
+                    <div>
+                        <C.ButtonReverse
+                            onClick={() => { setOpenUpdate(!openUpdate) }}
+                        >Editar Usuário</C.ButtonReverse>
+                    </div>
+                ) : (
+                    <C.Update openUpdate={openUpdate} >
+                        <C.Form>
+                            <C.FormImg>
+                                <PersonOutline
+                                    sx={{
+                                        fontSize: 30,
+                                        color: 'white',
+                                        '@media (max-width: 500px)': {
+                                            fontSize: 20,
+                                        }
+                                    }}
+                                />
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setNewName(e.target.value)}
+                                type='text'
+                                placeholder='Novo Nome...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <LockOutlined sx={{
+                                    fontSize: 30, color: 'white',
+                                    '@media (max-width: 500px)': {
+                                        fontSize: 20,
+                                    }
+                                }} />
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                type='password'
+                                placeholder='Nova Senha...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <LockOutlined sx={{
+                                    fontSize: 30, color: 'white',
+                                    '@media (max-width: 500px)': {
+                                        fontSize: 20,
+                                    }
+                                }} />
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setNewPasswordRepeat(e.target.value)}
+                                type='password'
+                                placeholder='Confirme a Nova Senha...'
+                            />
+                        </C.Form>
+                        <C.Form>
+                            <C.FormImg>
+                                <LockOutlined sx={{
+                                    fontSize: 30, color: 'white',
+                                    '@media (max-width: 500px)': {
+                                        fontSize: 20,
+                                    }
+                                }} />
+                            </C.FormImg>
+                            <C.FormInput
+                                onChange={(e) => setOldPassword(e.target.value)}
+                                type='password'
+                                placeholder='Senha Antiga...'
+                            />
+                        </C.Form>
+                        <C.msgUpdate>{user.message}</C.msgUpdate>
+                        <div style={{ textAlign: 'center' }}>
+                            <C.ButtonUpdate
+                                onClick={updateUser}
+                            >Atualizar</C.ButtonUpdate>
+                            <C.ButtonUpdate
+                                onClick={() => { setOpenUpdate(!openUpdate) }}
+                            >Voltar</C.ButtonUpdate>
+                        </div>
+                    </C.Update>
+                )}
                 <C.Welcome>
                     Seja muito bem vindo, {user.fullName}.
                 </C.Welcome>
@@ -53,32 +148,30 @@ export const Access = () => {
                     <C.Button onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
                     <C.Button onClick={disconnect} >SAIR</C.Button>
                 </C.Buttons>
-                <C.ListBox>
-                    {openList && user.list.length > 0 && (
-                        <C.List>
-                            <C.OrderBy>
-                                Ordernar Por:
-                                <C.Select
-                                    value={selectedOption}
-                                    onChange={e => setSelectedOption(e.target.value)}
-                                >
-                                    <C.Option
-                                        value=''
-                                    ></C.Option>
-                                    <C.Option
-                                        value='asc'
-                                    >A - Z</C.Option>
-                                    <C.Option
-                                        value='desc'
-                                    >Z - A</C.Option>
-                                </C.Select>
-                            </C.OrderBy>
-                            {user.list.map((item, index) => (
-                                <C.ListLi key={index}>{item}</C.ListLi>
-                            ))}
-                        </C.List>
-                    )}
-                </C.ListBox>
+                {openList && user.list.length > 0 && (
+                    <C.List openList={openList} >
+                        <C.OrderBy>
+                            Ordernar Por:
+                            <C.Select
+                                value={selectedOption}
+                                onChange={e => setSelectedOption(e.target.value)}
+                            >
+                                <C.Option
+                                    value=''
+                                ></C.Option>
+                                <C.Option
+                                    value='asc'
+                                >A - Z</C.Option>
+                                <C.Option
+                                    value='desc'
+                                >Z - A</C.Option>
+                            </C.Select>
+                        </C.OrderBy>
+                        {user.list.map((item, index) => (
+                            <C.ListLi key={index}>{item}</C.ListLi>
+                        ))}
+                    </C.List>
+                )}
             </C.Access>
         </C.Container>
     )

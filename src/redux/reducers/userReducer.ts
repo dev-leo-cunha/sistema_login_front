@@ -8,6 +8,7 @@ export const initialState = {
   errorLogin: "",
   errorRegister: "",
   list: [],
+  message: "",
 };
 
 // Criando o reducer "user" com as actions "userAuthenticated", "userAuthenticationFailed", "userList", "userRegisterFailed"
@@ -23,6 +24,15 @@ export const slice = createSlice({
       state.errorLogin = "";
       state.errorRegister = "";
       state.list = [];
+      state.message = "";
+    },
+    userAuthenticatedUpdate: (state, action) => {
+      state.message = action.payload.message;
+      state.fullName = action.payload.fullName;
+      state.token = action.payload.token;
+    },
+    userAuthenticatedFailedUpdate: (state, action) => {
+      state.message = action.payload;
     },
     userAuthenticationFailed: (state, action) => {
       // userAuthenticationFailed serve para armazenar o erro de autenticação no state
@@ -44,5 +54,7 @@ export const {
   userAuthenticationFailed,
   userList,
   userRegisterFailed,
+  userAuthenticatedUpdate,
+  userAuthenticatedFailedUpdate,
 } = slice.actions;
 export default slice.reducer;
