@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from "styled-components";
-import Background from "../img/background.jpg"
 
 // Estilização da página de acesso
 
@@ -17,10 +16,7 @@ export const Container = styled.div<themeProps>`
     flex-direction: column;
     padding: 30px;
     align-items: center;
-    min-height: 100vh;
-    background-image: url(${Background});
-    background-size: cover;
-    color: white;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     font-family: 'Courier New', Courier, monospace;
     box-sizing: border-box;
 `
@@ -30,11 +26,10 @@ export const Access = styled.div<themeProps>`
     flex-direction: column;
 `
 export const Welcome = styled.div<themeProps>`
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.4)'};
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: color 1s ease;
     border-radius: 40px;
     padding: 30px;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
@@ -64,11 +59,11 @@ export const Buttons = styled.div<themeProps>`
 
 export const Button = styled.button<themeProps>`
     font-size: 17px;
-    color: white;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     padding: 10px 20px;
     width: 180px;
     border: 0;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.4)'};
     border-radius: 0px 0px 20px 20px;
     cursor: pointer;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
@@ -86,11 +81,11 @@ export const Button = styled.button<themeProps>`
 `
 export const ButtonReverse = styled.button<themeProps>`
     font-size: 17px;
-    color: white;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     padding: 10px 20px;
     width: 180px;
     border: 0;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.4)'};
     border-radius: 20px 20px 0px 0px;
     cursor: pointer;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
@@ -159,7 +154,7 @@ export const OrderBy = styled.div<themeProps>`
 export const Select = styled.select<themeProps>`
     border: 1px solid white;
     background-color: transparent;
-    color: white;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     padding: 5px;
     border-radius: 10px;
     margin-left: 10px;
@@ -173,8 +168,8 @@ export const Select = styled.select<themeProps>`
     }
 `
 export const Option = styled.option<themeProps>`
-    color: white;
-    background-color: #00264D;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
+    background-color: ${props => props.theme === 'dark' ? '#00264D' : '#3995f1'};
     @media (max-width: 950px) {
         font-size: 11px;
     }
@@ -193,7 +188,7 @@ const collapseHeight = keyframes`
 
 export const Update = styled.div<updateProps>`
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.4)'};
     flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
@@ -229,7 +224,7 @@ export const FormImg = styled.div`
     width: 50px;
     height: 50px;
     border-right: 0;
-    background-color: #00264D;
+    background-color: ${props => props.theme === 'dark' ? '#00264D' : '#3995f1'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,11 +247,11 @@ export const FormInput = styled.input<themeProps>`
     padding-left: 10px;
     border: 0;
     outline: none;
-    background-color: #3A5073;
-    color: white;
+    background-color: ${props => props.theme === 'dark' ? '#3A5073' : '#6187c5'};
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     border-radius: 0 5px 5px 0;
     ::placeholder {
-        color: white
+        color: ${props => props.theme === 'dark' ? '#FFF' : '#000'}
     }
     @media (max-width: 950px) {
         width: 250px;
@@ -272,7 +267,7 @@ export const FormInput = styled.input<themeProps>`
 export const ButtonUpdate = styled.button<themeProps>`
     font-size: 17px;
     margin: 5px;
-    color: white;
+    color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     padding: 8px 16px;
     margin-bottom: 20px;
     width: 150px;
@@ -294,6 +289,7 @@ export const ButtonUpdate = styled.button<themeProps>`
     }
 `
 export const msgUpdate = styled.div`
+    color: ${props => props.theme === 'dark' ? '#ff0202' : '#950909'};
     height: 40px;
     text-align: center;
     @media (max-width: 950px) {

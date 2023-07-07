@@ -8,9 +8,10 @@ Este é um projeto de um sistema de login frontend. O sistema faz a requisição
 
 ## 🛠️ Funcionalidades
 
-- Faz a exbição do formulário de login, e com um clique, altera o formulário para outro formulário de registro.
+- Faz a exibição do formulário de login, e com um clique, altera o formulário para outro formulário de registro.
 - Faz a exibição da lista de usuário cadastrados no banco de dados em ordem crescente ou decrescente.
-- Faz a exibição do formulário de Update para alterar as informações do usuário
+- Faz a exibição do formulário de Update para alterar as informações do usuário.
+- Botão que faz a troca do tema da página, de dark para light.
 
 </br>
 
@@ -31,6 +32,7 @@ Este é um projeto de um sistema de login frontend. O sistema faz a requisição
 - Utilização do Router-DOM para trabalhar com as rotas;
 - Utilização do Axios para facilitar as requisições a api;
 - Utilização do redux para salvar os dados do usuário e também as mensagens de erros recebidas da api;
+- Utilização de props no styled components para alteração de cores dependendo do modo dark ou light escolhido pelo usuário;
 
 ## 🔎 Status do Projeto
 - Projeto rodando em: [Sistema Login - Leonardo Cunha](https://sistema-login.leonardocunha.dev.br/)

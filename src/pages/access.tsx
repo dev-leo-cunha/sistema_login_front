@@ -57,18 +57,18 @@ export const Access = () => {
     useEffect(() => { Order() }, [selectedOption]) // hook para ordenar a lista de usuários ao selecionar a opção
 
     return (
-        <C.Container>
+        <C.Container theme={theme}>
             <C.Access>
                 {!openUpdate ? (
                     <div>
-                        <C.ButtonReverse
+                        <C.ButtonReverse  theme={theme}
                             onClick={() => { setOpenUpdate(!openUpdate) }}
                         >Editar Usuário</C.ButtonReverse>
                     </div>
                 ) : (
-                    <C.Update openUpdate={openUpdate} >
+                    <C.Update  theme={theme} openUpdate={openUpdate} >
                         <C.Form>
-                            <C.FormImg>
+                            <C.FormImg  theme={theme}>
                                 <PersonOutline
                                     sx={{
                                         fontSize: 30,
@@ -79,14 +79,14 @@ export const Access = () => {
                                     }}
                                 />
                             </C.FormImg>
-                            <C.FormInput
+                            <C.FormInput theme={theme}
                                 onChange={(e) => setNewName(e.target.value)}
                                 type='text'
                                 placeholder='Novo Nome...'
                             />
                         </C.Form>
                         <C.Form>
-                            <C.FormImg>
+                            <C.FormImg theme={theme}>
                                 <LockOutlined sx={{
                                     fontSize: 30, color: 'white',
                                     '@media (max-width: 500px)': {
@@ -94,14 +94,14 @@ export const Access = () => {
                                     }
                                 }} />
                             </C.FormImg>
-                            <C.FormInput
+                            <C.FormInput  theme={theme}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 type='password'
                                 placeholder='Nova Senha...'
                             />
                         </C.Form>
                         <C.Form>
-                            <C.FormImg>
+                            <C.FormImg  theme={theme}>
                                 <LockOutlined sx={{
                                     fontSize: 30, color: 'white',
                                     '@media (max-width: 500px)': {
@@ -109,14 +109,14 @@ export const Access = () => {
                                     }
                                 }} />
                             </C.FormImg>
-                            <C.FormInput
+                            <C.FormInput  theme={theme}
                                 onChange={(e) => setNewPasswordRepeat(e.target.value)}
                                 type='password'
                                 placeholder='Confirme a Nova Senha...'
                             />
                         </C.Form>
                         <C.Form>
-                            <C.FormImg>
+                            <C.FormImg theme={theme}>
                                 <LockOutlined sx={{
                                     fontSize: 30, color: 'white',
                                     '@media (max-width: 500px)': {
@@ -124,45 +124,45 @@ export const Access = () => {
                                     }
                                 }} />
                             </C.FormImg>
-                            <C.FormInput
+                            <C.FormInput theme={theme}
                                 onChange={(e) => setOldPassword(e.target.value)}
                                 type='password'
                                 placeholder='Senha Antiga...'
                             />
                         </C.Form>
-                        <C.msgUpdate>{user.message}</C.msgUpdate>
+                        <C.msgUpdate theme={theme}>{user.message}</C.msgUpdate>
                         <div style={{ textAlign: 'center' }}>
-                            <C.ButtonUpdate
+                            <C.ButtonUpdate  theme={theme}
                                 onClick={updateUser}
                             >Atualizar</C.ButtonUpdate>
-                            <C.ButtonUpdate
+                            <C.ButtonUpdate  theme={theme}
                                 onClick={() => { setOpenUpdate(!openUpdate) }}
                             >Voltar</C.ButtonUpdate>
                         </div>
                     </C.Update>
                 )}
-                <C.Welcome>
+                <C.Welcome  theme={theme}>
                     Seja muito bem vindo, {user.fullName}.
                 </C.Welcome>
                 <C.Buttons>
-                    <C.Button onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
-                    <C.Button onClick={disconnect} >SAIR</C.Button>
+                    <C.Button  theme={theme} onClick={() => { setOpenList(open => !open) }}>Mostrar/Ocultar Nome de Usuários Cadastrados.</C.Button>
+                    <C.Button  theme={theme} onClick={disconnect} >SAIR</C.Button>
                 </C.Buttons>
                 {openList && user.list.length > 0 && (
                     <C.List openList={openList} >
                         <C.OrderBy>
                             Ordernar Por:
-                            <C.Select
+                            <C.Select  theme={theme}
                                 value={selectedOption}
                                 onChange={e => setSelectedOption(e.target.value)}
                             >
-                                <C.Option
+                                <C.Option  theme={theme}
                                     value=''
                                 ></C.Option>
-                                <C.Option
+                                <C.Option  theme={theme}
                                     value='asc'
                                 >A - Z</C.Option>
-                                <C.Option
+                                <C.Option  theme={theme}
                                     value='desc'
                                 >Z - A</C.Option>
                             </C.Select>

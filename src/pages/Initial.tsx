@@ -6,17 +6,14 @@ import { useDispatch } from 'react-redux'
 import { userAuthenticated, userAuthenticationFailed, userRegisterFailed } from '../redux/reducers/userReducer';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 
-import * as C from './loginStyle'
+import * as C from './InitialStyle'
 import { LoginRounded, PersonOutline, LockOutlined, BadgeOutlined, HowToRegOutlined, ArrowBackOutlined } from '@mui/icons-material';
 import { Box, Step, StepLabel, Stepper } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 export const Login = () => {
-    const themeMaterial = useTheme();
-
     const dispatch = useDispatch(); // hook para disparar uma action
     const user = useAppSelector(state => state.user); // hook para acessar o usuário
-    const theme = useAppSelector(state => state.theme); // hook para acessar o tema
+    const theme = useAppSelector(state => state.theme.theme); // hook para acessar o tema
 
     const navigate = useNavigate(); // hook para navegar entre as páginas
 
@@ -103,21 +100,21 @@ export const Login = () => {
             <C.FormAll>
                 {!toogleSignIn ? (
                     <C.Login>
-                        <C.Character>
+                        <C.Character theme={theme} >
                             <LoginRounded sx={{
-                                fontSize: 70, color: 'white',
+                                fontSize: 70, color: theme === 'dark' ? 'white' : 'black',
                                 '@media (max-width: 500px)': {
                                     fontSize: 40,
                                 }
                             }} />
                         </C.Character>
-                        <C.signIn>
+                        <C.signIn theme={theme}>
                             <C.Form>
-                                <C.FormImg>
+                                <C.FormImg theme={theme}>
                                     <PersonOutline
                                         sx={{
                                             fontSize: 30,
-                                            color: 'white',
+                                            color: theme === 'dark' ? 'white' : 'black',
                                             '@media (max-width: 500px)': {
                                                 fontSize: 20,
                                             }
@@ -125,34 +122,37 @@ export const Login = () => {
                                     />
                                 </C.FormImg>
                                 <C.FormInput
+                                    theme={theme}
                                     onChange={(e) => setEmailLogin(e.target.value)}
                                     type='email'
                                     placeholder='Email...'
                                 />
                             </C.Form>
                             <C.Form>
-                                <C.FormImg>
+                                <C.FormImg theme={theme}>
                                     <LockOutlined sx={{
-                                        fontSize: 30, color: 'white',
+                                        fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
                                         '@media (max-width: 500px)': {
                                             fontSize: 20,
                                         }
                                     }} />
                                 </C.FormImg>
                                 <C.FormInput
+                                    theme={theme}
                                     onChange={(e) => setPasswordLogin(e.target.value)}
                                     onKeyDown={hadleKeyDown}
                                     type='password'
                                     placeholder='Senha...'
                                 />
                             </C.Form>
-                            <C.Error>{user.errorLogin}</C.Error>
+                            <C.Error theme={theme}>{user.errorLogin}</C.Error>
                             <C.Loading>
-                                {loadingLogin && <C.Loading>Carregando...</C.Loading>}
+                                {loadingLogin && <C.Loading theme={theme}>Carregando...</C.Loading>}
                             </C.Loading>
                             <Box
                                 sx={{
-                                    color: 'white', cursor: 'pointer', marginTop: '15px',
+                                    color: theme === 'dark' ? 'white' : 'black',
+                                    cursor: 'pointer', marginTop: '15px',
                                     '@media (max-width: 500px)': {
                                         fontSize: 11,
                                         marginTop: '10px'
@@ -163,42 +163,43 @@ export const Login = () => {
                                 }}
                             >Não tem cadastro? Clique aqui!</Box>
                         </C.signIn>
-                        <C.Button onClick={handleButton}>ENTRAR</C.Button>
+                        <C.Button theme={theme} onClick={handleButton}>ENTRAR</C.Button>
                     </C.Login>
                 ) : (
                     <C.FormRegister>
-                        <C.Character>
+                        <C.Character theme={theme}>
                             <HowToRegOutlined sx={{
-                                fontSize: 70, color: 'white',
+                                fontSize: 70, color: theme === 'dark' ? 'white' : 'black',
                                 '@media (max-width: 500px)': {
                                     fontSize: 40,
                                 }
                             }} />
                         </C.Character>
-                        <C.Register>
+                        <C.Register theme={theme}>
                             {!toogleStepPassowrd ? (
                                 <>
                                     <Box sx={{ marginBottom: '15px' }}>
                                         <Stepper activeStep={0} alternativeLabel>
                                             {steps.map(({ key, label }) => (
                                                 <Step sx={{
-                                                    '& .MuiSvgIcon-root': { fill: '#00264D', }
+                                                    '& .MuiSvgIcon-root': { fill: theme === 'dark' ? '#00264D' : '#3995f1', }
                                                 }} key={key}>
-                                                    <StepLabel><Box sx={{ color: 'white' }} >{label}</Box></StepLabel>
+                                                    <StepLabel><Box sx={{ color: theme === 'dark' ? 'white' : 'black' }} >{label}</Box></StepLabel>
                                                 </Step>
                                             ))}
                                         </Stepper>
                                     </Box>
                                     <C.Form>
-                                        <C.FormImg>
+                                        <C.FormImg theme={theme}>
                                             <BadgeOutlined sx={{
-                                                fontSize: 30, color: 'white',
+                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
                                                 '@media (max-width: 500px)': {
                                                     fontSize: 20,
                                                 }
                                             }} />
                                         </C.FormImg>
                                         <C.FormInput
+                                            theme={theme}
                                             value={fullNameRegister}
                                             onChange={(e) => setFullNameRegister(e.target.value)}
                                             type='text'
@@ -206,24 +207,25 @@ export const Login = () => {
                                         />
                                     </C.Form>
                                     <C.Form>
-                                        <C.FormImg>
+                                        <C.FormImg theme={theme}>
                                             <PersonOutline sx={{
-                                                fontSize: 30, color: 'white',
+                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
                                                 '@media (max-width: 500px)': {
                                                     fontSize: 20,
                                                 }
                                             }} />
                                         </C.FormImg>
                                         <C.FormInput
+                                            theme={theme}
                                             value={emailRegister}
                                             onChange={(e) => setEmailRegister(e.target.value)}
                                             type='email'
                                             placeholder='Email...'
                                         />
                                     </C.Form>
-                                    <C.Error>{errorNextStep}</C.Error>
-                                    <C.Loading>
-                                        {loadingRegister && <C.Loading>Carregando...</C.Loading>}
+                                    <C.Error theme={theme}>{errorNextStep}</C.Error>
+                                    <C.Loading theme={theme}>
+                                        {loadingRegister && <C.Loading theme={theme}>Carregando...</C.Loading>}
                                     </C.Loading>
                                 </>
                             ) : (
@@ -238,7 +240,7 @@ export const Login = () => {
                                             <ArrowBackOutlined
                                                 onClick={() => { settoogleStepPassowrd(!toogleStepPassowrd) }}
                                                 sx={{
-                                                    fontSize: 40, color: 'white', cursor: 'pointer',
+                                                    fontSize: 40, color: theme === 'dark' ? 'white' : 'black', cursor: 'pointer',
                                                     '@media (max-width: 500px)': {
                                                         fontSize: 25
                                                     }
@@ -251,7 +253,7 @@ export const Login = () => {
                                                     '& .MuiSvgIcon-root': { fill: '#00264D' }
                                                 }} key={key}>
                                                     <StepLabel><Box sx={{
-                                                        color: 'white', '@media (max-width: 500px)': {
+                                                        color: theme === 'dark' ? 'white' : 'black', '@media (max-width: 500px)': {
                                                             fontSize: 11
                                                         }
                                                     }}>{label}</Box></StepLabel>
@@ -260,15 +262,16 @@ export const Login = () => {
                                         </Stepper>
                                     </Box>
                                     <C.Form>
-                                        <C.FormImg>
+                                        <C.FormImg theme={theme}>
                                             <LockOutlined sx={{
-                                                fontSize: 30, color: 'white',
+                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
                                                 '@media (max-width: 500px)': {
                                                     fontSize: 20,
                                                 }
                                             }} />
                                         </C.FormImg>
                                         <C.FormInput
+                                            theme={theme}
                                             value={passwordRegister}
                                             onChange={(e) => setPasswordRegister(e.target.value)}
                                             type='password'
@@ -276,30 +279,31 @@ export const Login = () => {
                                         />
                                     </C.Form>
                                     <C.Form>
-                                        <C.FormImg>
+                                        <C.FormImg theme={theme}>
                                             <LockOutlined sx={{
-                                                fontSize: 30, color: 'white',
+                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
                                                 '@media (max-width: 500px)': {
                                                     fontSize: 20,
                                                 }
                                             }} />
                                         </C.FormImg>
                                         <C.FormInput
+                                            theme={theme}
                                             value={passwordRepeatRegister}
                                             onChange={(e) => setPasswordRepeatRegister(e.target.value)}
                                             type='password'
                                             placeholder='Repita a Senha...'
                                         />
                                     </C.Form>
-                                    <C.Error>{user.errorRegister}</C.Error>
-                                    <C.Loading>
-                                        {loadingRegister && <C.Loading>Carregando...</C.Loading>}
+                                    <C.Error theme={theme}>{user.errorRegister}</C.Error>
+                                    <C.Loading theme={theme}>
+                                        {loadingRegister && <C.Loading theme={theme}>Carregando...</C.Loading>}
                                     </C.Loading>
                                 </>
                             )}
                             <Box
                                 sx={{
-                                    color: 'white', cursor: 'pointer', marginTop: '25px',
+                                    color: theme === 'dark' ? 'white' : 'black', cursor: 'pointer', marginTop: '25px',
                                     '@media (max-width: 500px)': {
                                         fontSize: 11,
                                         marginTop: '10px'
@@ -314,15 +318,15 @@ export const Login = () => {
                             >Já tem conta? Clique aqui!</Box>
                         </C.Register>
                         {!toogleStepPassowrd ? (
-                            <C.Button onClick={handleNextStep}>Próxima Etapa</C.Button>
+                            <C.Button theme={theme} onClick={handleNextStep}>Próxima Etapa</C.Button>
                         ) : (
-                            <C.Button onClick={handleSaveRegister}>Cadastrar e Entrar</C.Button>
+                            <C.Button theme={theme} onClick={handleSaveRegister}>Cadastrar e Entrar</C.Button>
                         )}
 
                     </C.FormRegister>
                 )}
             </C.FormAll>
-            <C.message>site em atualização constante...</C.message>
+            <C.message theme={theme}>site em atualização constante...</C.message>
         </C.Container>
     )
 }
