@@ -21,6 +21,7 @@ export const Container = styled.div<themeProps>`
     box-sizing: border-box;
 `
 export const Access = styled.div<themeProps>`
+    margin-top: 40px;
     display: flex;
     align-items: center;
     flex-direction: column;

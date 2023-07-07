@@ -45,9 +45,23 @@ const App = () => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            '@media (max-width: 950px)': {
+              fontSize: '13px'
+            },
+            '@media (max-width: 500px)': {
+              fontSize: '12px'
+            }
           }}
           >
-            <SettingsBrightnessOutlined sx={{ fontSize: '50px', }} />
+            <SettingsBrightnessOutlined sx={{
+              fontSize: '50px',
+              '@media (max-width: 950px)': {
+                fontSize: '40px'
+              },
+              '@media (max-width: 500px)': {
+                fontSize: '30px'
+              }
+            }} />
             {theme.theme}
 
           </Box>
