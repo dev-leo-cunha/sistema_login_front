@@ -9,6 +9,7 @@ import { useAppSelector } from '../redux/hooks/useAppSelector';
 import * as C from './InitialStyle'
 import { LoginRounded, PersonOutline, LockOutlined, BadgeOutlined, HowToRegOutlined, ArrowBackOutlined } from '@mui/icons-material';
 import { Box, Step, StepLabel, Stepper } from '@mui/material';
+import { BadgeOutlinedStyle, BoxStyle, HowToRegOutlinedStyle, LockOutlinedStyle, LoginRoundedStyle, PersonOutlineStyle } from './MuiStyle';
 
 export const Login = () => {
     const dispatch = useDispatch(); // hook para disparar uma action
@@ -26,9 +27,9 @@ export const Login = () => {
     const [passwordRegister, setPasswordRegister] = useState(''); // hook para armazenar a senha do cadastro
     const [passwordRepeatRegister, setPasswordRepeatRegister] = useState(''); // hook para armazenar a senha de confirmação do cadastro
     const [loadingRegister, setLoadingRegister] = useState(false) // hook para armazenar o estado de carregamento do cadastro
-    const [toogleSignIn, setToogleSignIn] = useState(false)
-    const [toogleStepPassowrd, settoogleStepPassowrd] = useState(false)
-    const [errorNextStep, setErrorNextStep] = useState('')
+    const [toogleSignIn, setToogleSignIn] = useState(false) // hook para armazenar o estado de carregamento do cadastro
+    const [toogleStepPassowrd, settoogleStepPassowrd] = useState(false)  // hook para avazenar o estado de carregamento do cadastro
+    const [errorNextStep, setErrorNextStep] = useState('') // hook para salvar o erro de cadastro
 
 
 
@@ -101,25 +102,13 @@ export const Login = () => {
                 {!toogleSignIn ? (
                     <C.Login>
                         <C.Character theme={theme} >
-                            <LoginRounded sx={{
-                                fontSize: 70, color: theme === 'dark' ? 'white' : 'black',
-                                '@media (max-width: 500px)': {
-                                    fontSize: 40,
-                                }
-                            }} />
+                            <LoginRounded sx={LoginRoundedStyle(theme)} />
                         </C.Character>
                         <C.signIn theme={theme}>
                             <C.Form>
                                 <C.FormImg theme={theme}>
                                     <PersonOutline
-                                        sx={{
-                                            fontSize: 30,
-                                            color: theme === 'dark' ? 'white' : 'black',
-                                            '@media (max-width: 500px)': {
-                                                fontSize: 20,
-                                            }
-                                        }}
-                                    />
+                                        sx={PersonOutlineStyle(theme)} />
                                 </C.FormImg>
                                 <C.FormInput
                                     theme={theme}
@@ -130,12 +119,7 @@ export const Login = () => {
                             </C.Form>
                             <C.Form>
                                 <C.FormImg theme={theme}>
-                                    <LockOutlined sx={{
-                                        fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
-                                        '@media (max-width: 500px)': {
-                                            fontSize: 20,
-                                        }
-                                    }} />
+                                    <LockOutlined sx={LockOutlinedStyle(theme)} />
                                 </C.FormImg>
                                 <C.FormInput
                                     theme={theme}
@@ -149,15 +133,7 @@ export const Login = () => {
                             <C.Loading>
                                 {loadingLogin && <C.Loading theme={theme}>Carregando...</C.Loading>}
                             </C.Loading>
-                            <Box
-                                sx={{
-                                    color: theme === 'dark' ? 'white' : 'black',
-                                    cursor: 'pointer', marginTop: '15px',
-                                    '@media (max-width: 500px)': {
-                                        fontSize: 11,
-                                        marginTop: '10px'
-                                    }
-                                }}
+                            <Box sx={BoxStyle(theme)}
                                 onClick={() => {
                                     setToogleSignIn(!toogleSignIn)
                                 }}
@@ -168,12 +144,7 @@ export const Login = () => {
                 ) : (
                     <C.FormRegister>
                         <C.Character theme={theme}>
-                            <HowToRegOutlined sx={{
-                                fontSize: 70, color: theme === 'dark' ? 'white' : 'black',
-                                '@media (max-width: 500px)': {
-                                    fontSize: 40,
-                                }
-                            }} />
+                            <HowToRegOutlined sx={HowToRegOutlinedStyle(theme)} />
                         </C.Character>
                         <C.Register theme={theme}>
                             {!toogleStepPassowrd ? (
@@ -191,12 +162,7 @@ export const Login = () => {
                                     </Box>
                                     <C.Form>
                                         <C.FormImg theme={theme}>
-                                            <BadgeOutlined sx={{
-                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
-                                                '@media (max-width: 500px)': {
-                                                    fontSize: 20,
-                                                }
-                                            }} />
+                                            <BadgeOutlined sx={BadgeOutlinedStyle(theme)} />
                                         </C.FormImg>
                                         <C.FormInput
                                             theme={theme}
@@ -208,12 +174,7 @@ export const Login = () => {
                                     </C.Form>
                                     <C.Form>
                                         <C.FormImg theme={theme}>
-                                            <PersonOutline sx={{
-                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
-                                                '@media (max-width: 500px)': {
-                                                    fontSize: 20,
-                                                }
-                                            }} />
+                                            <PersonOutline sx={PersonOutlineStyle(theme)} />
                                         </C.FormImg>
                                         <C.FormInput
                                             theme={theme}
@@ -263,12 +224,7 @@ export const Login = () => {
                                     </Box>
                                     <C.Form>
                                         <C.FormImg theme={theme}>
-                                            <LockOutlined sx={{
-                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
-                                                '@media (max-width: 500px)': {
-                                                    fontSize: 20,
-                                                }
-                                            }} />
+                                            <LockOutlined sx={LockOutlinedStyle(theme)} />
                                         </C.FormImg>
                                         <C.FormInput
                                             theme={theme}
@@ -280,12 +236,7 @@ export const Login = () => {
                                     </C.Form>
                                     <C.Form>
                                         <C.FormImg theme={theme}>
-                                            <LockOutlined sx={{
-                                                fontSize: 30, color: theme === 'dark' ? 'white' : 'black',
-                                                '@media (max-width: 500px)': {
-                                                    fontSize: 20,
-                                                }
-                                            }} />
+                                            <LockOutlined sx={LockOutlinedStyle(theme)} />
                                         </C.FormImg>
                                         <C.FormInput
                                             theme={theme}
@@ -302,13 +253,7 @@ export const Login = () => {
                                 </>
                             )}
                             <Box
-                                sx={{
-                                    color: theme === 'dark' ? 'white' : 'black', cursor: 'pointer', marginTop: '25px',
-                                    '@media (max-width: 500px)': {
-                                        fontSize: 11,
-                                        marginTop: '10px'
-                                    }
-                                }}
+                                sx={BoxStyle(theme)}
                                 onClick={() => {
                                     setToogleSignIn(!toogleSignIn)
                                     settoogleStepPassowrd(false)
