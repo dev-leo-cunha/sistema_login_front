@@ -174,9 +174,7 @@ export const message = styled.div<themeProps>`
     color: ${props => props.theme === 'dark' ? '#FFF' : '#000'};
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
-    margin: 20px 0;
-    position: absolute;
-    bottom: 0;
+    margin-top: 300px;
     @media (max-width: 500px) {
         font-size: 12px;
     }

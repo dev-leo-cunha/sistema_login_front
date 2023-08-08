@@ -4,7 +4,7 @@ import { access, listOrder, update } from '../api/auth';
 import { useAppSelector } from '../redux/hooks/useAppSelector';
 import { initialState, userAuthenticated, userAuthenticatedFailedUpdate, userAuthenticatedUpdate, userAuthenticationFailed, userList } from '../redux/reducers/userReducer';
 import { useDispatch } from 'react-redux';
-import * as C from './accessStyle';
+import * as C from '../Style/accessStyle';
 import { LockOutlined, PersonOutline } from '@mui/icons-material';
 
 export const Access = () => {
